@@ -13,6 +13,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: creditos_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres123
+        options: >-
+          --health-cmd pg_isready -U postgres -d creditos_db
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     defaults:
       run:
         working-directory: backend
@@ -24,5 +38,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Esperar banco de dados
+        run: |
+          for i in {1..30}; do
+            pg_isready -h localhost -p 5432 -U postgres && break
+            sleep 2
+          done
       - name: Build, Testes e Checkstyle
         run: ./mvnw clean verify 
