@@ -11,3 +11,4 @@ class CreditosApplicationTests {
 	}
 
 }
+// Teste de CI: validação de pipeline
