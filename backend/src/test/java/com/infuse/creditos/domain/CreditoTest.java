@@ -80,4 +80,34 @@ class CreditoTest {
             assertEquals(new BigDecimal("800.00"), credito.getBaseCalculo());
         }
     }
+
+    @Nested
+    @DisplayName("Equals, HashCode e ToString")
+    class EqualsHashCodeToString {
+        @Test
+        @DisplayName("Deve comparar objetos Credito corretamente (referência e campos)")
+        void deveCompararObjetos() {
+            Credito c1 = new Credito();
+            c1.setNumeroCredito("A");
+            Credito c2 = new Credito();
+            c2.setNumeroCredito("A");
+            assertNotEquals(c1, c2); // equals padrão (referência)
+            assertEquals(c1, c1);    // mesmo objeto
+            assertNotEquals(c1, null);
+            assertNotEquals(c1, new Object());
+        }
+        @Test
+        @DisplayName("Deve gerar toString não nulo")
+        void deveGerarToString() {
+            Credito c = new Credito();
+            assertNotNull(c.toString());
+        }
+        @Test
+        @DisplayName("Deve gerar hashCode para objetos diferentes")
+        void deveGerarHashCode() {
+            Credito c1 = new Credito();
+            Credito c2 = new Credito();
+            assertNotEquals(c1.hashCode(), c2.hashCode());
+        }
+    }
 } 
