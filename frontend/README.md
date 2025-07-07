@@ -22,6 +22,17 @@ Gerado com [Angular CLI](https://angular.io/cli) usando:
    ```
 3. Acesse em [http://localhost:4200](http://localhost:4200)
 
+## Lint e Formatação
+
+- **Lint (ESLint):**
+  ```bash
+  npm run lint
+  ```
+- **Formatação (Prettier):**
+  ```bash
+  npm run format
+  ```
+
 ## Estrutura de Pastas
 
 - `src/app/` - Código principal da aplicação
@@ -29,10 +40,9 @@ Gerado com [Angular CLI](https://angular.io/cli) usando:
 - `angular.json` - Configuração do projeto Angular
 
 ## Próximos Passos
-- Configurar ESLint e Prettier
 - Implementar tela de consulta de créditos
 - Adicionar integração com API REST
 - Dockerizar frontend
 
 ---
-> Referência: [Angular Project Setup](https://angular.io/cli/new)
+> Referência: [Angular + ESLint](https://github.com/angular-eslint/angular-eslint)
