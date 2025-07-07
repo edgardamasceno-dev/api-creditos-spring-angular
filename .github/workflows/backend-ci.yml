@@ -36,10 +36,14 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Debug Docker State
+        run: |
+          docker ps -a
+          docker system df
       - name: Esperar banco de dados
         run: |
           for i in {1..30}; do
-            pg_isready -h localhost -p 5432 -U postgres && break
+            pg_isready -h postgres -p 5432 -U postgres && break
             sleep 2
           done
       - name: Build, Testes e Checkstyle
