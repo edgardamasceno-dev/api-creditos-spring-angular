@@ -21,28 +21,30 @@ services:
       timeout: 5s
       retries: 5
 
-  # Backend service - será implementado futuramente
-  # backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
-  #   container_name: ${COMPOSE_PROJECT_NAME:-api-creditos}_backend
-  #   restart: unless-stopped
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-dev}
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-creditos_db}
-  #     - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER:-postgres}
-  #     - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD:-postgres123}
-  #   ports:
-  #     - "${BACKEND_PORT:-8080}:8080"
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   networks:
-  #     - creditos-network
-  #   volumes:
-  #     - ./backend:/app
-  #     - backend_logs:/app/logs
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME:-api-creditos}_backend
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=${POSTGRES_DB:-creditos_db}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres123}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-dev}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-creditos_db}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - creditos-network
+    # volumes:
+    #   - ./backend:/app
+    #   - backend_logs:/app/logs
 
   # Frontend service - será implementado futuramente
   # frontend:
