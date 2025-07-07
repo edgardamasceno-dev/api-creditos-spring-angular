@@ -218,4 +218,8 @@ Este projeto está estruturado para suportar:
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. 
+Este projeto está sob a licença MIT.
+
+---
+
+> Este projeto segue os padrões de desenvolvimento descritos em [api-creditos-spring-angular.md](./api-creditos-spring-angular.md). 
