@@ -20,11 +20,12 @@ jobs:
           POSTGRES_DB: creditos_db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres123
-        options: >-
-          --health-cmd pg_isready -U postgres -d creditos_db
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        # Remover temporariamente o healthcheck para diagnóstico
+        # options: >-
+        #   --health-cmd pg_isready -U postgres -d creditos_db
+        #   --health-interval 10s
+        #   --health-timeout 5s
+        #   --health-retries 5
     defaults:
       run:
         working-directory: backend
@@ -47,4 +48,8 @@ jobs:
             sleep 2
           done
       - name: Build, Testes e Checkstyle
-        run: ./mvnw clean verify 
+        run: ./mvnw clean verify
+      - name: Clean up Docker
+        run: |
+          docker rm -f $(docker ps -aq) || true
+          docker system prune -af || true 
