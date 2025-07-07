@@ -77,12 +77,14 @@ pnpm-lock.yaml
 # BANCO DE DADOS
 # ====================================
 # PostgreSQL
-*.sql
 *.dump
 *.backup
 data/
 pgdata/
 postgres_data/
+
+# Permitir scripts de inicialização do banco
+!database/init/*.sql
 
 # H2 Database
 *.db
