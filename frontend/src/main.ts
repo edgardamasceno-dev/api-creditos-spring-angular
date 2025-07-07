@@ -1,6 +1,2 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
-
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+// Shell mínimo para inicialização futura
+console.log('Frontend Angular inicializado. Pronto para desenvolvimento.');
