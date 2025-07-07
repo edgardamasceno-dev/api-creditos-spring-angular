@@ -21,5 +21,4 @@ public class CreditosApplication {
 			registry.addRedirectViewController("/swagger", "/swagger-ui.html");
 		}
 	}
-
 }
