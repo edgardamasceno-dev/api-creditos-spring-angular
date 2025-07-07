@@ -1,10 +1,12 @@
+[![Build Status](https://github.com/edgardamasceno-dev/api-creditos-spring-angular/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/edgardamasceno-dev/api-creditos-spring-angular/actions/workflows/backend-ci.yml)
+
 ## Documentação da API
 
 Acesse a documentação interativa dos endpoints:
-- **Swagger UI:** http://localhost:8080/swagger-ui.html
+- **Swagger UI:** http://localhost:8080/swagger
 - **Redoc (open source):** http://localhost:8080/docs
 
-A documentação é gerada automaticamente via [springdoc-openapi](https://springdoc.org/).
+A documentação é gerada automaticamente via [springdoc-openapi](https://springdoc.org/). O acesso sem ".html" é feito via redirecionamento elegante.
 
 ## Arquitetura Backend
 
