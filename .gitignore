@@ -1,0 +1,196 @@
+# ====================================
+# ARQUIVOS DE CONFIGURAÇÃO SENSÍVEIS
+# ====================================
+.env
+.env.local
+.env.*.local
+*.env
+secrets.properties
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# ====================================
+# LOGS
+# ====================================
+logs/
+*.log
+log/
+*.log.*
+
+# ====================================
+# JAVA / SPRING BOOT
+# ====================================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# JAR files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Spring Boot
+spring-boot-*.log
+application-*.properties
+
+# ====================================
+# ANGULAR / NODE.JS
+# ====================================
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+/dist
+tmp/
+/tmp
+
+# Angular specific
+.angular/
+.nx/cache
+
+# Testing
+coverage/
+.nyc_output/
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ====================================
+# BANCO DE DADOS
+# ====================================
+# PostgreSQL
+*.sql
+*.dump
+*.backup
+data/
+pgdata/
+postgres_data/
+
+# H2 Database
+*.db
+*.h2.db
+*.mv.db
+*.trace.db
+
+# ====================================
+# DOCKER
+# ====================================
+# Docker volumes
+volumes/
+data/
+.dockerignore
+
+# ====================================
+# IDEs
+# ====================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ====================================
+# SISTEMAS OPERACIONAIS
+# ====================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+
+# ====================================
+# BACKUP E TEMPORÁRIOS
+# ====================================
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# ====================================
+# CERTIFICADOS E CHAVES
+# ====================================
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+*.keystore
+*.truststore
+
+# ====================================
+# DIVERSOS
+# ====================================
+.sass-cache/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-project
+.tern-port
+.vscode-test
+.eslintcache
+.stylelintcache 
