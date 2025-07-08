@@ -46,25 +46,21 @@ services:
     #   - ./backend:/app
     #   - backend_logs:/app/logs
 
-  # Frontend service - será implementado futuramente
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   container_name: ${COMPOSE_PROJECT_NAME:-api-creditos}_frontend
-  #   restart: unless-stopped
-  #   environment:
-  #     - NODE_ENV=${NODE_ENV:-development}
-  #     - ANGULAR_API_URL=${ANGULAR_API_URL:-http://localhost:8080}
-  #   ports:
-  #     - "${FRONTEND_PORT:-4200}:4200"
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - creditos-network
-  #   volumes:
-  #     - ./frontend:/app
-  #     - /app/node_modules
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME:-api-creditos}_frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - ANGULAR_API_URL=${ANGULAR_API_URL:-http://localhost:8080}
+    ports:
+      - "${FRONTEND_PORT:-4200}:80"
+    depends_on:
+      - backend
+    networks:
+      - creditos-network
 
 volumes:
   postgres_data:

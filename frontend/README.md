@@ -44,5 +44,16 @@ Gerado com [Angular CLI](https://angular.io/cli) usando:
 - Adicionar integração com API REST
 - Dockerizar frontend
 
+## Docker
+
+- **Build e execução do frontend Angular via Docker Compose:**
+  ```bash
+  docker-compose up frontend
+  ```
+- **Variáveis de ambiente:**
+  - `ANGULAR_API_URL`: URL da API backend a ser consumida pelo frontend (default: http://localhost:8080)
+- O frontend será servido em http://localhost:4200
+- Integração automática com backend e banco via rede Docker Compose
+
 ---
 > Referência: [Angular + ESLint](https://github.com/angular-eslint/angular-eslint)
