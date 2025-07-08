@@ -15,23 +15,23 @@ Gerado com [Angular CLI](https://angular.io/cli) usando:
    npm install
    ```
 2. Rode o servidor de desenvolvimento:
-   ```bash
+```bash
    npm start
    # ou
-   ng serve
-   ```
+ng serve
+```
 3. Acesse em [http://localhost:4200](http://localhost:4200)
 
 ## Lint e Formatação
 
 - **Lint (ESLint):**
-  ```bash
+```bash
   npm run lint
-  ```
+```
 - **Formatação (Prettier):**
-  ```bash
+```bash
   npm run format
-  ```
+```
 
 ## Estrutura de Pastas
 
@@ -47,7 +47,7 @@ Gerado com [Angular CLI](https://angular.io/cli) usando:
 ## Docker
 
 - **Build e execução do frontend Angular via Docker Compose:**
-  ```bash
+```bash
   docker-compose up frontend
   ```
 - **Variáveis de ambiente:**
