@@ -1,63 +1,75 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
-  <div class="form-row">
-    <label for="numeroNfse">Número da NFS-e</label>
-    <input
-      id="numeroNfse"
-      formControlName="numeroNfse"
-      type="text"
-      placeholder="Digite o número da NFS-e"
-    />
+<div class="consulta-card">
+  <div class="consulta-tabs">
+    <button type="button" [class.active]="modoBusca === 'nfse'" (click)="setModoBusca('nfse')">
+      NFS-e
+    </button>
+    <button type="button" [class.active]="modoBusca === 'credito'" (click)="setModoBusca('credito')">
+      Nº Crédito
+    </button>
   </div>
-  <div class="form-row">
-    <label for="numeroCredito">Número do Crédito</label>
-    <input
-      id="numeroCredito"
-      formControlName="numeroCredito"
-      type="text"
-      placeholder="Digite o número do crédito"
-    />
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
+    <div class="consulta-search-row">
+      <div class="consulta-search-input">
+        <span class="icon-search"></span>
+        <input
+          *ngIf="modoBusca === 'nfse'"
+          id="numeroNfse"
+          formControlName="numeroNfse"
+          type="text"
+          placeholder="Buscar por número da NFS-e..."
+          autocomplete="off"
+        />
+        <input
+          *ngIf="modoBusca === 'credito'"
+          id="numeroCredito"
+          formControlName="numeroCredito"
+          type="text"
+          placeholder="Buscar por número do crédito..."
+          autocomplete="off"
+        />
+      </div>
+      <button type="submit" [disabled]="form.invalid || loading" class="consulta-btn-buscar">Buscar</button>
+    </div>
+  </form>
+  <hr class="consulta-divider" />
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="creditos && creditos.length" class="consulta-table-wrapper">
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>Nº Crédito</th>
+          <th>Nº NFS-e</th>
+          <th>Data Constituição</th>
+          <th>Valor ISSQN</th>
+          <th>Tipo</th>
+          <th>Simples Nacional</th>
+          <th>Alíquota</th>
+          <th>Valor Faturado</th>
+          <th>Valor Dedução</th>
+          <th>Base Cálculo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of creditos">
+          <td>{{ c.numeroCredito }}</td>
+          <td>{{ c.numeroNfse }}</td>
+          <td>{{ c.dataConstituicao }}</td>
+          <td>{{ c.valorIssqn | number:'1.2-2' }}</td>
+          <td>{{ c.tipoCredito }}</td>
+          <td>
+            <span class="badge" [class.badge-green]="c.simplesNacional" [class.badge-gray]="!c.simplesNacional">
+              {{ c.simplesNacional ? 'Sim' : 'Não' }}
+            </span>
+          </td>
+          <td>{{ c.aliquota | number:'1.2-2' }}</td>
+          <td>{{ c.valorFaturado | number:'1.2-2' }}</td>
+          <td>{{ c.valorDeducao | number:'1.2-2' }}</td>
+          <td>{{ c.baseCalculo | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="form-row">
-    <button type="submit" [disabled]="form.invalid || loading">Buscar</button>
+  <div *ngIf="creditos && !creditos.length && !loading && !error" class="no-results">
+    Nenhum crédito encontrado.
   </div>
-</form>
-
-<div *ngIf="error" class="error">{{ error }}</div>
-
-<table *ngIf="creditos && creditos.length" class="result-table">
-  <thead>
-    <tr>
-      <th>Nº Crédito</th>
-      <th>Nº NFS-e</th>
-      <th>Data Constituição</th>
-      <th>Valor ISSQN</th>
-      <th>Tipo</th>
-      <th>Simples Nacional</th>
-      <th>Alíquota</th>
-      <th>Valor Faturado</th>
-      <th>Valor Dedução</th>
-      <th>Base Cálculo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let c of creditos">
-      <td>{{ c.numeroCredito }}</td>
-      <td>{{ c.numeroNfse }}</td>
-      <td>{{ c.dataConstituicao }}</td>
-      <td>{{ c.valorIssqn | number: "1.2-2" }}</td>
-      <td>{{ c.tipoCredito }}</td>
-      <td>{{ c.simplesNacional ? "Sim" : "Não" }}</td>
-      <td>{{ c.aliquota | number: "1.2-2" }}</td>
-      <td>{{ c.valorFaturado | number: "1.2-2" }}</td>
-      <td>{{ c.valorDeducao | number: "1.2-2" }}</td>
-      <td>{{ c.baseCalculo | number: "1.2-2" }}</td>
-    </tr>
-  </tbody>
-</table>
-
-<div
-  *ngIf="creditos && !creditos.length && !loading && !error"
-  class="no-results"
->
-  Nenhum crédito encontrado.
 </div>

@@ -54,8 +54,12 @@
   border-left: 1px solid #e5e7eb;
 }
 .consulta-tabs button:first-child {
-  border-top-left-radius: 0.6rem;
-  border-top-right-radius: 0;
+  border-top-left-radius: 0.6rem !important;
+  border-top-right-radius: 0 !important;
+}
+.consulta-tabs button:last-child {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 .consulta-tabs button.active {
   color: #2563eb;
@@ -293,7 +297,8 @@
     background: #fff;
   }
   .consulta-tabs button,
-  .consulta-tabs button.active {
+  .consulta-tabs button.active,
+  .consulta-tabs button:hover {
     border-radius: 0 !important;
   }
   .consulta-search-row {
