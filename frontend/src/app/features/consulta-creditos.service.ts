@@ -17,13 +17,17 @@ export interface Credito {
 
 function getApiUrl(): string {
   if (typeof window !== 'undefined') {
-    const env = (window as unknown as Record<string, unknown>)['__env'] as
-      | { API_URL?: string }
-      | undefined;
+    const env = (window as any)['__env'] as { API_URL?: string } | undefined;
     if (env && typeof env.API_URL === 'string') {
       return env.API_URL;
     }
   }
+  
+  // Em desenvolvimento, usar a URL completa do backend
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    return 'http://localhost:8080/api/creditos';
+  }
+  
   return '/api/creditos';
 }
 
@@ -40,3 +44,4 @@ export class ConsultaCreditosService {
     return this.http.get<Credito>(`${this.apiUrl}/credito/${numeroCredito}`);
   }
 }
+ 

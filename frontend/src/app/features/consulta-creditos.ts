@@ -47,7 +47,9 @@ export class ConsultaCreditosComponent {
   onSubmit() {
     this.error = '';
     this.creditos = [];
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      return;
+    }
     const { numeroNfse, numeroCredito } = this.form.value;
     this.loading = true;
     if (this.modoBusca === 'nfse' && numeroNfse) {
