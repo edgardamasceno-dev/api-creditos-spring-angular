@@ -44,4 +44,3 @@ export class ConsultaCreditosService {
     return this.http.get<Credito>(`${this.apiUrl}/credito/${numeroCredito}`);
   }
 }
- 
