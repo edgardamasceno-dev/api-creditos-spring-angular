@@ -1,0 +1,99 @@
+<div class="consulta-card">
+  <div class="consulta-tabs">
+    <button type="button" [class.active]="modoBusca === 'nfse'" (click)="setModoBusca('nfse')">
+      NFS-e
+    </button>
+    <button type="button" [class.active]="modoBusca === 'credito'" (click)="setModoBusca('credito')">
+      Nº Crédito
+    </button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
+    <div class="consulta-search-row">
+      <div class="consulta-search-input">
+        <span class="icon-search"></span>
+        <input
+          *ngIf="modoBusca === 'nfse'"
+          id="numeroNfse"
+          formControlName="numeroNfse"
+          type="text"
+          placeholder="Buscar por número da NFS-e..."
+          autocomplete="off"
+          [maxlength]="maxLengthNfse"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          (keydown)="permitirApenasNumeros($event)"
+          (input)="limparNaoNumericos('numeroNfse')"
+        />
+        <input
+          *ngIf="modoBusca === 'credito'"
+          id="numeroCredito"
+          formControlName="numeroCredito"
+          type="text"
+          placeholder="Buscar por número do crédito..."
+          autocomplete="off"
+          [maxlength]="maxLengthCredito"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          (keydown)="permitirApenasNumeros($event)"
+          (input)="limparNaoNumericos('numeroCredito')"
+        />
+      </div>
+      <button type="submit" [disabled]="form.invalid || loading" class="consulta-btn-buscar">Buscar</button>
+    </div>
+  </form>
+  <hr class="consulta-divider" />
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="creditos && creditos.length" class="consulta-table-wrapper">
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>Nº Crédito</th>
+          <th>Nº NFS-e</th>
+          <th>Data Constituição</th>
+          <th>Valor ISSQN</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of creditos"
+            [ngClass]="{ 'mobile-row': isMobile }"
+            (click)="isMobile ? abrirDetalhes(c) : null"
+            (touchstart)="isMobile ? abrirDetalhes(c) : null">
+          <td data-label="Nº Crédito">{{ c.numeroCredito || '-' }}</td>
+          <td data-label="Nº NFS-e">{{ c.numeroNfse || '-' }}</td>
+          <td data-label="Data Constituição">{{ c.dataConstituicao ? (c.dataConstituicao | date:'dd/MM/yyyy') : '-' }}</td>
+          <td data-label="Valor ISSQN" class="valor-direita">{{ c.valorIssqn != null ? (c.valorIssqn | currency:'BRL':'symbol':'1.2-2':'pt-BR') : '-' }}</td>
+          <td data-label="Ações">
+            <button type="button" class="btn-visualizar" (click)="abrirDetalhes(c); $event.stopPropagation();" title="Visualizar detalhes">
+              <span class="icon-eye"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="creditos && !creditos.length && !loading && !error" class="no-results">
+    Nenhum crédito encontrado.
+  </div>
+</div>
+
+<!-- Modal de detalhes -->
+<div class="modal-backdrop" *ngIf="creditoSelecionado" (click)="fecharModal()"></div>
+<div class="modal-detalhes" *ngIf="creditoSelecionado">
+  <div class="modal-conteudo" (click)="$event.stopPropagation()">
+    <button class="modal-fechar" (click)="fecharModal()" title="Fechar">&times;</button>
+    <h2>Detalhes do Crédito</h2>
+    <table class="detalhes-table">
+      <tr><th>Nº Crédito</th><td>{{ creditoSelecionado.numeroCredito || '-' }}</td></tr>
+      <tr><th>Nº NFS-e</th><td>{{ creditoSelecionado.numeroNfse || '-' }}</td></tr>
+      <tr><th>Data Constituição</th><td>{{ creditoSelecionado.dataConstituicao ? (creditoSelecionado.dataConstituicao | date:'dd/MM/yyyy') : '-' }}</td></tr>
+      <tr><th>Valor ISSQN</th><td>{{ creditoSelecionado.valorIssqn != null ? (creditoSelecionado.valorIssqn | currency:'BRL':'symbol':'1.2-2':'pt-BR') : '-' }}</td></tr>
+      <tr><th>Tipo</th><td>{{ creditoSelecionado.tipoCredito || '-' }}</td></tr>
+      <tr><th>Simples Nacional</th><td>{{ creditoSelecionado.simplesNacional != null ? (creditoSelecionado.simplesNacional ? 'Sim' : 'Não') : '-' }}</td></tr>
+      <tr><th>Alíquota</th><td>{{ creditoSelecionado.aliquota != null ? (creditoSelecionado.aliquota | currency:'BRL':'symbol':'1.2-2':'pt-BR') : '-' }}</td></tr>
+      <tr><th>Valor Faturado</th><td>{{ creditoSelecionado.valorFaturado != null ? (creditoSelecionado.valorFaturado | currency:'BRL':'symbol':'1.2-2':'pt-BR') : '-' }}</td></tr>
+      <tr><th>Valor Dedução</th><td>{{ creditoSelecionado.valorDeducao != null ? (creditoSelecionado.valorDeducao | currency:'BRL':'symbol':'1.2-2':'pt-BR') : '-' }}</td></tr>
+      <tr><th>Base Cálculo</th><td>{{ creditoSelecionado.baseCalculo != null ? (creditoSelecionado.baseCalculo | currency:'BRL':'symbol':'1.2-2':'pt-BR') : '-' }}</td></tr>
+    </table>
+  </div>
+</div>
